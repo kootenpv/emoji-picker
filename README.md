@@ -12,4 +12,4 @@ The config in i3 is:
 (ensure python refers to the full path and also provide the full path to `unicodepynput.py`)
 
 
-![emoji screenshot](./picker_screenshot.png)
+![emoji screenshot](./emoji_picker.gif)
