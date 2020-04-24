@@ -1,3 +1,6 @@
 just
 requests
 lxml
+pysimplegui
+pyperclip
+pynput
