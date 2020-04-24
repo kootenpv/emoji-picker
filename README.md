@@ -1,8 +1,16 @@
 # emoji-picker
 
-It contains the [download_emojis.py](https://github.com/kootenpv/emoji-picker/blob/master/download_emojis.py) script to generate a list of emojis that can be used.
+For any web apps, or pages, like WhatsApp, Slack, Discord and so on this can be used to pick emojis.
+
+## Installation
 
 It's made cross-platform available by relying on `pysimplegui`, `pyperclip` and `pynput`.
+
+It contains the [download_emojis.py](https://github.com/kootenpv/emoji-picker/blob/master/download_emojis.py) script to generate a list of emojis that can be used.
+
+    python -m pip install -r requirements.txt
+    python download_emojis.py
+
 
 ### Windows
 
