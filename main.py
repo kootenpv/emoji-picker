@@ -37,12 +37,7 @@ layout = [
 ]
 
 window = sg.Window(
-    'emoji-picker',
-    layout,
-    return_keyboard_events=True,
-    font=("Helvetica", 18),
-    no_titlebar=True,
-    alpha_channel=0.2,
+    'emoji-picker', layout, return_keyboard_events=True, font=("Helvetica", 18), no_titlebar=True,
 )
 
 normal_color = sg.theme_text_color()
