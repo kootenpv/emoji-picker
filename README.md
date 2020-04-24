@@ -1,6 +1,6 @@
 # emoji-picker
 
-It contains the [script](https://github.com/kootenpv/emoji-picker/blob/master/download_emojis.py) to generate a list of emojis that can be used.
+It contains the [download_emojis.py](https://github.com/kootenpv/emoji-picker/blob/master/download_emojis.py) script to generate a list of emojis that can be used.
 
 It's made cross-platform available by relying on `pysimplegui`, `pyperclip` and `pynput`.
 
