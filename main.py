@@ -79,7 +79,7 @@ while True:
     elif event.startswith("Ok"):
         pass
     elif event.startswith("Control"):
-        if last_key.startswith("BackSpace"):
+        if last_key.startswith("BackSpace") or event == "\x7f":
             letters = []
             sofar.update(value="".join(letters))
             search()
@@ -87,33 +87,33 @@ while True:
         pass
     elif event.startswith("Super"):
         pass
-    elif event.startswith("Return"):
+    elif event.startswith("Return") or event == "\r":
         emoji = matches[selected_index].split("|")[0]
         break
-    elif event.startswith("Escape"):
+    elif event.startswith("Escape") or event == "\x1b":
         break
-    elif event.startswith("BackSpace"):
+    elif event.startswith("BackSpace") or event == "\x7f":
         if last_key.startswith("Control"):
             letters = []
         else:
             letters = letters[:-1]
         sofar.update(value="".join(letters))
         search()
-    elif event.startswith("space"):
+    elif event.startswith("space") or event == " ":
         letters.append(" ")
         sofar.update(value="".join(letters))
-    elif event.startswith("colon"):
+    elif event.startswith("colon") or event == ":":
         letters.append(":")
         sofar.update(value="".join(letters))
-    elif event.startswith("semicolon"):
+    elif event.startswith("semicolon") or event == ";":
         letters.append(";")
         sofar.update(value="".join(letters))
-    elif event.startswith("Down"):
+    elif event.startswith("Down") or event == "\uf701":
         selected_index = min(selected_index + 1, min(len(matches), len(imgs)) - 1)
         for i, inp in enumerate(inps):
             color = active_color if selected_index == i else normal_color
             inp.update(text_color=color)
-    elif event.startswith("Up"):
+    elif event.startswith("Up") or event == "\uf700":
         selected_index = max(0, selected_index - 1)
         for i, inp in enumerate(inps):
             color = active_color if selected_index == i else normal_color
