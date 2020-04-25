@@ -36,9 +36,7 @@ layout = [
     *[list(x) for x in zip(imgs, inps)],
 ]
 
-window = sg.Window(
-    'emoji-picker', layout, return_keyboard_events=True, font=("Helvetica", 18), no_titlebar=True,
-)
+window = sg.Window('emoji-picker', layout, return_keyboard_events=True, font=("Helvetica", 18))
 
 normal_color = sg.theme_text_color()
 active_color = sg.theme_input_background_color()
@@ -75,7 +73,7 @@ while True:
     print(event)
     if emojis is None:
         print("loading emoji")
-        emojis = just.read("/home/pascal/emojis2.txt").split("\n")
+        emojis = just.read("~/emojis2.txt").split("\n")
     if event in (None, 'Cancel'):  # if user closes window or clicks cancel
         break
     elif event.startswith("Ok"):

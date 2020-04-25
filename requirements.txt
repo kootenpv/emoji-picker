@@ -4,3 +4,4 @@ lxml
 pysimplegui
 pyperclip
 pynput
+pillow
