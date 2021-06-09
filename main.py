@@ -71,23 +71,29 @@ def search():
 while True:
     event, values = window.read()
     print(event)
+    do_search = True
     if emojis is None:
         print("loading emoji")
         emojis = just.read("~/emojis2.txt").split("\n")
     if event in (None, 'Cancel'):  # if user closes window or clicks cancel
         break
     elif event.startswith("Ok"):
-        pass
+        do_search = False
     elif event.startswith("Control"):
         if last_key.startswith("BackSpace") or event == "\x7f":
             letters = []
             sofar.update(value="".join(letters))
             search()
     elif event.startswith("Shift"):
-        pass
+        do_search = False
     elif event.startswith("Super"):
-        pass
-    elif event.startswith("Return") or event == "\r":
+        do_search = False
+    elif (
+        event.startswith("Return")
+        or event == "\r"
+        or event.startswith("Tab")
+        or event.startswith("question")
+    ):
         emoji = matches[selected_index].split("|")[0]
         break
     elif event.startswith("Escape") or event == "\x1b":
@@ -98,12 +104,23 @@ while True:
         else:
             letters = letters[:-1]
         sofar.update(value="".join(letters))
-        search()
+    elif event.startswith("parenright"):
+        letters.append(")")
+        sofar.update(value="".join(letters))
+    elif event.startswith("parenleft"):
+        letters.append("(")
+        sofar.update(value="".join(letters))
     elif event.startswith("space") or event == " ":
         letters.append(" ")
         sofar.update(value="".join(letters))
     elif event.startswith("colon") or event == ":":
         letters.append(":")
+        sofar.update(value="".join(letters))
+    elif event.startswith("minus") or event == "-":
+        letters.append("-")
+        sofar.update(value="".join(letters))
+    elif event.startswith("underscore") or event == "_":
+        letters.append("_")
         sofar.update(value="".join(letters))
     elif event.startswith("semicolon") or event == ";":
         letters.append(";")
@@ -113,16 +130,19 @@ while True:
         for i, inp in enumerate(inps):
             color = active_color if selected_index == i else normal_color
             inp.update(text_color=color)
+        do_search = False
     elif event.startswith("Up") or event == "\uf700":
         selected_index = max(0, selected_index - 1)
         for i, inp in enumerate(inps):
             color = active_color if selected_index == i else normal_color
             inp.update(text_color=color)
+        do_search = False
     else:
         letter = event.split(":")[0]
         letters.append(letter)
         sofar.update(value="".join(letters))
         selected_index = 0
+    if do_search:
         search()
     last_key = event
 
@@ -150,6 +170,10 @@ if emoji:
         keyboard.press("v")
         keyboard.release("v")
         keyboard.release(Key.ctrl)
+
+    if event.startswith("question"):
+        keyboard.press("?")
+        keyboard.release("?")
 
     time.sleep(0.1)
     pyperclip.copy(current)
