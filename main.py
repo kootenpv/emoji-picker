@@ -6,11 +6,11 @@ from PIL import Image, ImageTk
 from io import BytesIO
 import base64
 
-sg.theme('LightBlue2')  # Add a touch of color
+sg.theme("LightBlue2")  # Add a touch of color
 
 WIDTH = 60
 
-sofar = sg.Text('', size=(WIDTH, 1), font=('Helvetica', 22, 'underline'))
+sofar = sg.Text("", size=(WIDTH, 1), font=("Helvetica", 22, "underline"))
 
 selected_index = 0
 
@@ -22,7 +22,10 @@ imgs = [
     sg.Image(data=""),
 ]
 inps = [
-    sg.Text("Start typing to match emotes!", size=(WIDTH, 1),),
+    sg.Text(
+        "Start typing to match emotes!",
+        size=(WIDTH, 1),
+    ),
     sg.Text("", size=(WIDTH, 1)),
     sg.Text("Press Escape to exit", size=(WIDTH, 1)),
     sg.Text("Hit Return to choose.", size=(WIDTH, 1)),
@@ -31,12 +34,12 @@ inps = [
 
 # [sg.Text('_' * (WIDTH + 25))]
 layout = [
-    [sofar, sg.Button('Ok', visible=False), sg.Button('Cancel', visible=False)],
-    [sg.Text('_' * (WIDTH + 25))],
+    [sofar, sg.Button("Ok", visible=False), sg.Button("Cancel", visible=False)],
+    [sg.Text("_" * (WIDTH + 25))],
     *[list(x) for x in zip(imgs, inps)],
 ]
 
-window = sg.Window('emoji-picker', layout, return_keyboard_events=True, font=("Helvetica", 18))
+window = sg.Window("emoji-picker", layout, return_keyboard_events=True, font=("Helvetica", 18))
 
 normal_color = sg.theme_text_color()
 active_color = sg.theme_input_background_color()
@@ -75,7 +78,7 @@ while True:
     if emojis is None:
         print("loading emoji")
         emojis = just.read("~/emojis2.txt").split("\n")
-    if event in (None, 'Cancel'):  # if user closes window or clicks cancel
+    if event in (None, "Cancel"):  # if user closes window or clicks cancel
         break
     elif event.startswith("Ok"):
         do_search = False
@@ -86,14 +89,11 @@ while True:
             search()
     elif event.startswith("Shift"):
         do_search = False
+    elif event.startswith("Alt"):
+        do_search = False
     elif event.startswith("Super"):
         do_search = False
-    elif (
-        event.startswith("Return")
-        or event == "\r"
-        or event.startswith("Tab")
-        or event.startswith("question")
-    ):
+    elif event.startswith("Return") or event == "\r" or event.startswith("Tab") or event.startswith("question"):
         emoji = matches[selected_index].split("|")[0]
         break
     elif event.startswith("Escape") or event == "\x1b":
@@ -160,7 +160,7 @@ if emoji:
     keyboard = Controller()
 
     operating_system = platform.system()
-    if operating_system == 'Darwin':
+    if operating_system == "Darwin":
         keyboard.press(Key.cmd)
         keyboard.press("v")
         keyboard.release("v")
