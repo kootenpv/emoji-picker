@@ -39,7 +39,7 @@ layout = [
     *[list(x) for x in zip(imgs, inps)],
 ]
 
-window = sg.Window("emoji-picker", layout, return_keyboard_events=True, font=("Helvetica", 18))
+window = sg.Window("emoji-picker", layout, return_keyboard_events=True, font=("Helvetica", 18), location=(0, 0))
 
 normal_color = sg.theme_text_color()
 active_color = sg.theme_input_background_color()
@@ -131,6 +131,8 @@ while True:
             color = active_color if selected_index == i else normal_color
             inp.update(text_color=color)
         do_search = False
+    elif event.startswith("Left") or event.startswith("Right"):
+        continue
     elif event.startswith("Up") or event == "\uf700":
         selected_index = max(0, selected_index - 1)
         for i, inp in enumerate(inps):
